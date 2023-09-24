@@ -1,0 +1,25 @@
+version: "3"
+name: inventory-hub-email-service
+volumes:
+  azurite-data:
+
+services:
+  function-app:
+    profiles: [production]
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - azurite
+    environment:
+      - AzureWebJobsStorage=UseDevelopmentStorage=true
+      - FUNCTIONS_WORKER_RUNTIME=dotnet-isolated
+  azurite:
+    image: mcr.microsoft.com/azure-storage/azurite
+    ports:
+      - "10000:10000"
+      - "10001:10001"
+      - "10002:10002"
+    volumes:
+      - azurite-data:/data
+    restart: unless-stopped
