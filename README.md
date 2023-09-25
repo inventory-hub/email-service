@@ -15,12 +15,12 @@ docker run -it -e "AzureCommunicationServicesConnectionString=<connection string
 
 ## Contracts
 
-Invitation email, queue `invitation-emails`:
+Invitation email, queue `invitation-messages`:
 
 ```json
 {
-  "to": "a@a.a",
-  "token": "122244444",
-  "callbackUrl": "https://nigger.com"
+  "to": "sample.email@example.com",
+  "token": "ASB12323123",
+  "callbackUrl": "https://example.com/sing-up"
 }
 ```

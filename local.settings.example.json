@@ -3,6 +3,7 @@
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "SENDER_ADDRESS": "example@contoso.com",
     "COMMUNICATION_SERVICES_CONNECTION_STRING": "XXXXXXXX"
   }
 }

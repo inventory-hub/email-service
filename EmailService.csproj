@@ -11,11 +11,15 @@
     <PackageReference Include="Azure.Communication.Email" Version="1.0.1" />
     <PackageReference Include="FluentValidation" Version="11.7.1" />
     <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.19.0" />
-    <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Storage.Queues" Version="5.2.0" />
+    <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Storage.Queues"
+      Version="5.2.0" />
     <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="1.14.1" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates/**/*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="local.settings.json">

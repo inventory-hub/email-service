@@ -1,4 +1,4 @@
-namespace EmailService.Services.Contracts;
+namespace EmailService.Services.EmailSender.Contracts;
 
 public record EmailData
 {
