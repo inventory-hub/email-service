@@ -37,7 +37,8 @@ public class InvitationEmailHandler
 
         return _emailTemplateFactory.GetHtmlTemplateAsync("invitation.html", new Dictionary<string, string>
         {
-            { "InvitationUrl", invitationUrl}
+            { "InvitationUrl", invitationUrl},
+            { "FullName", invitationEmailMessage.FullName}
         });
     }
 

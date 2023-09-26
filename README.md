@@ -10,7 +10,7 @@ To run locally, either install azure functions SDK and dotnet 7 SDK and setup th
 
 ```bash
 docker build -t inventory-hub-email-service .
-docker run -it -e "AzureCommunicationServicesConnectionString=<connection string>" inventory-hub-email-service
+docker run -it -e "SENDER_ADDRESS=no-reply@inventory-hub.space" -e "AzureCommunicationServicesConnectionString=<connection string>" inventory-hub-email-service
 ```
 
 ## Contracts
@@ -20,7 +20,12 @@ Invitation email, queue `invitation-messages`:
 ```json
 {
   "to": "sample.email@example.com",
+  "fullName": "John Doe",
   "token": "ASB12323123",
-  "callbackUrl": "https://example.com/sing-up"
+  "callbackUrl": "https://inventory-hub.space/sign-up"
 }
 ```
+
+The generated link will be `https://inventory-hub.space/sign-up?token=ASB12323123`
+
+Note: Sanitize the values, they are interpolated in HTML.
