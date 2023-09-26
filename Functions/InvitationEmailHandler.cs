@@ -33,7 +33,7 @@ public class InvitationEmailHandler
         {
             Query = $"token={invitationEmailMessage.Token}"
         };
-        string invitationUrl = uriBuilder.ToString();
+        string invitationUrl = uriBuilder.Uri.ToString();
 
         return _emailTemplateFactory.GetHtmlTemplateAsync("invitation.html", new Dictionary<string, string>
         {

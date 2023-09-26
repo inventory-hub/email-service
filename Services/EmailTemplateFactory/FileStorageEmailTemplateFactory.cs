@@ -40,11 +40,8 @@ public class FileStorageEmailTemplateFactory : IEmailTemplateFactory
     public async Task<string> GetHtmlTemplateAsync(string templateName, IDictionary<string, string> templateData)
     {
         string rawTemplate = await GetRawTemplate(templateName);
-        StringBuilder htmlTemplateBuilder = new(rawTemplate);
-        foreach (KeyValuePair<string, string> kv in templateData)
-        {
-            Regex.Replace(htmlTemplateBuilder.ToString(), $"{{{{\\s*{kv.Key}\\s*}}}}", kv.Value);
-        }
-        return htmlTemplateBuilder.ToString();
+        string htmlData = templateData
+            .Aggregate(rawTemplate, (current, kv) => Regex.Replace(current, $"{{{{\\s*{kv.Key}\\s*}}}}", kv.Value, RegexOptions.IgnoreCase));
+        return htmlData;
     }
 }
