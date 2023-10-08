@@ -45,7 +45,12 @@ public class InvitationEmailHandler
     [Function(nameof(InvitationEmailHandler))]
     public async Task Run([QueueTrigger("invitation-messages")] InvitationEmailMessage invitationEmailMessage)
     {
-        _validator.ValidateAndThrow(invitationEmailMessage);
+        var validationResult = await _validator.ValidateAsync(invitationEmailMessage);
+        if (!validationResult.IsValid)
+        {
+            _logger.LogError("Invalid invitation email message: {}", validationResult.Errors);
+            throw new ValidationException(validationResult.Errors);
+        }
         try
         {
             string htmlContent = await GetHtmlData(invitationEmailMessage);
@@ -58,9 +63,9 @@ public class InvitationEmailHandler
         }
         catch
         {
-            _logger.LogError($"Failed to send invitation email to {invitationEmailMessage.To}");
+            _logger.LogError("Failed to send invitation email to {}", invitationEmailMessage.To);
             throw;
         }
-        _logger.LogInformation($"Sent invitation email to {invitationEmailMessage.To}");
+        _logger.LogInformation("Sent invitation email to {}", invitationEmailMessage.To);
     }
 }
